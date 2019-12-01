@@ -22,10 +22,17 @@ void print(const string mesg) {
 
 class Game {
 	private:
+		string name;
 		vector<char> dirs;
 
 	public:
-		string name;
+		void setName() {
+			cin >> game.name;
+		}
+
+		string getName() {
+			return name;
+		}
 
 		void setDir() {
 			char tmp;
@@ -55,8 +62,8 @@ int main() {
 
 	print("Welcome to the New World.\nI hope you enjoyed your journey here.");
 	print("What is your name?");
-	cin >> game.name;
-	print("Hello " + game.name + ".\nWell, now that we're acquainted I guess you'll be wanting to be on your way.");
+	game.setName;
+	print("Hello " + game.getName() + ".\nWell, now that we're acquainted I guess you'll be wanting to be on your way.");
 	print("Do you want to go [l]eft or [r]ight?");
 	game.setDir();
 	print("OK, " + game.getDir(0) + " it is.");
