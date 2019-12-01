@@ -151,6 +151,10 @@ int main() {
 
 	game.chapter();
 
+	print(
+		"On the other side, "
+		);
+
 	// game.ask("Would you prefer to go [l]eft or [r]ight?");
 	// game.setDir();
 	// game.say("OK, " + game.getDir(0) + " it is.");
