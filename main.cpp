@@ -1,49 +1,66 @@
 #include <iostream>
 #include <string>
-#include <array>
+//#include <array>
+#include <vector>
 
 using std::cout;
 using std::endl;
 using std::cin;
 using std::string;
 //using std::to_string;
-using std::array;
+//using std::array;
+using std::vector;
 
-struct line {
-    string mesg;
-    string *var;
-};
-
-class Game {
-public:
-    static const unsigned int len{6};
-    static const unsigned int turns{1};
-
-    string name;
-    array <string, turns> dirs;
-
-    array <line, len> story{
-            line{"Welcome to the New World.\nI hope you enjoyed your journey here.", nullptr},
-            line{"What is your name?", &name},
-            line{"Hello " + name + ".\nWell, now that we're acquainted I guess you'll be wanting to be on your way.",
-                 nullptr},
-            line{"Do you want to go [left] or [right]?", &dirs[0]},
-            line{"OK, " + dirs[0] + " it is", nullptr},
-			line{"",nullptr},
-    };
-};
+//struct line {
+//    string mesg;
+//    string *var;
+//};
 
 void print(const string mesg) {
-    cout << mesg << endl;
+	cout << mesg << endl;
 }
 
+class Game {
+	private:
+		vector<char> dirs;
+
+	public:
+		string name;
+
+		void setDir() {
+			char tmp;
+			cin >> tmp;
+			while (!(tmp == 'l' || tmp == 'r')) {
+				print("Sorry, you can only go [l]eft or [r]ight. Which would you like?");
+				cin >> tmp;
+			}	
+			dirs.push_back(tmp);
+		}
+
+		string getDir(const unsigned int num) {
+			switch(dirs[num]) {
+				case 'l':
+					return "left";
+				case 'r':
+					return "right";
+				default:
+					return "";
+			}
+		}
+
+};
+
 int main() {
-    Game game;
-    for (unsigned int i{0}; i < game.len; ++i) {
-        print(game.story[i].mesg);
-        if (game.story[i].var != nullptr) {
-            cin >> *game.story[i].var;
-        }
-    }
-    return 0;
+	Game game;
+
+	print("Welcome to the New World.\nI hope you enjoyed your journey here.");
+	print("What is your name?");
+	cin >> game.name;
+	print("Hello " + game.name + ".\nWell, now that we're acquainted I guess you'll be wanting to be on your way.");
+	print("Do you want to go [l]eft or [r]ight?");
+	game.setDir();
+	print("OK, " + game.getDir(0) + " it is.");
+	print("");
+
+	return 0;
 }
